@@ -14,14 +14,16 @@ namespace TrainApp
         List<TrainTrack> _trainTracks;
         List<Schedule> _schedules;
         List<Station> _stations;
+        List<Passenger> _passengers;
 
         TimeSpan globalClock = new TimeSpan(10, 25, 00);
         TimeSpan zero = new TimeSpan(00, 00, 00);
 
-        public TravelPlan(List<TrainTrack> trainTracks, List<Station> stations)
+        public TravelPlan(List<TrainTrack> trainTracks, List<Station> stations, List<Passenger> passengers)
         {
             _trainTracks = trainTracks;
             _stations = stations;
+            _passengers = passengers;
         }
 
         public TravelPlan SetTrain(List<Train> trains)
@@ -50,7 +52,6 @@ namespace TrainApp
                 {
                     Thread.Sleep(500);
                     globalClock = globalClock.Add(new TimeSpan(00, 01, 00));
-                    Console.WriteLine("Clock is: " + globalClock);
                     foreach (var train in _trains)
                     {
                         var track = _trainTracks.Where(x => x.Id == train.TrainTrackId).FirstOrDefault();
@@ -64,7 +65,9 @@ namespace TrainApp
                                 train.Stop();
 
                                 var timeStartStation = trainTimeTableList.Where(x => x.StationId == track.StartStationID).FirstOrDefault();
-                                
+
+                                Console.WriteLine("The train " + train.Name + " is at: " + _stations.Where(x => x.ID == track.StartStationID).Single().StationName + " station");
+
                                 if ((timeStartStation.DepartureTime - globalClock) >= zero)
                                     Console.WriteLine("Train waiting to depart. Departing in : " + (timeStartStation.DepartureTime - globalClock));
 
@@ -95,10 +98,10 @@ namespace TrainApp
 
                             case TrainState.onWayToFirstSwitch:
 
-                                if (train.DistanceTravelled >= track.Swith1Distance)
+                                if (train.DistanceTravelled >= track.Switch1Distance)
                                 {
-                                    track.Swith1Direction = true;
-                                    Console.WriteLine("First Switch is switched to it's right position");
+                                    track.Switch1Direction = false;
+                                    Console.WriteLine("First Switch is switched to it's left position");
                                     train.trainState = TrainState.onWayToMiddleStation;
                                 }
                                 break;
@@ -123,12 +126,26 @@ namespace TrainApp
                                 {
                                     Console.WriteLine("Train Departing");
                                     train.Start();
+                                    train.trainState = TrainState.onWayToSecondSwitch;
+                                }
+                                break;
+
+                            case TrainState.onWayToSecondSwitch:
+                                if (train.DistanceTravelled >= track.Switch2Distance)
+                                {
+                                    track.Switch2Direction = true;
+                                    Console.WriteLine("Second Switch is switched to it's right position");
                                     train.trainState = TrainState.onWayToEndStation;
                                 }
                                 break;
 
                             case TrainState.onWayToEndStation:
-
+                                if (train.DistanceTravelled >= track.EndStationDistance)
+                                {
+                                    train.trainState = TrainState.atEndStation;
+                                    train.Stop();
+                                    Console.WriteLine("The train has arrived at: " + _stations.Where(x => x.ID == track.EndStationID).Single().StationName);
+                                }
 
                                 break;
 
@@ -136,18 +153,8 @@ namespace TrainApp
 
                                 break;
                         }
-
-
-
                     }
-
-                    // check distance of all trains
-                    // var traindistance = trains[0].Distance;
-                    //if train disance == destination stop train
-                    //if all trains are stoped, break
-                    //Console.WriteLine(traindistance);
                 }
-
             }
             return this;
         }

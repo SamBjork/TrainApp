@@ -11,11 +11,13 @@ namespace TrainApp
         public int ID { get; private set; }
         public string StationName { get; private set; }
         public bool EndStation { get; private set; }
+        public List<Passenger> PassengersInStation { get; set; }
         public Station(int id, string stationName, bool endStation)
         {
             ID = id;
             StationName = stationName;
             EndStation = endStation;
+            PassengersInStation = new List<Passenger>();
         }
 
 

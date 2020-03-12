@@ -12,10 +12,10 @@ namespace TrainApp
         public int MiddleStationID { get; set; }
         public int EndStationDistance { get; set; }
         public int EndStationID { get; set; } 
-        public int Swith1Distance { get; set; }
-        public bool Swith1Direction { get; set; }
+        public int Switch1Distance { get; set; }
+        public bool Switch1Direction { get; set; }
         public int Switch2Distance { get; set; }
-        public bool Swith2Direction { get; set; }
+        public bool Switch2Direction { get; set; }
         public int CrossingDistance { get; set; }
 
     }
