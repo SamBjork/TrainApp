@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainApp", "TrainApp\TrainApp.csproj", "{96F8982A-E846-446A-B4F8-A8E579A62258}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainApp.Test", "TrainApp.Test\TrainApp.Test.csproj", "{0EE9DFC6-CF1F-4FB8-8EA1-3D5882BBA632}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96F8982A-E846-446A-B4F8-A8E579A62258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96F8982A-E846-446A-B4F8-A8E579A62258}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96F8982A-E846-446A-B4F8-A8E579A62258}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96F8982A-E846-446A-B4F8-A8E579A62258}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EE9DFC6-CF1F-4FB8-8EA1-3D5882BBA632}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EE9DFC6-CF1F-4FB8-8EA1-3D5882BBA632}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EE9DFC6-CF1F-4FB8-8EA1-3D5882BBA632}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EE9DFC6-CF1F-4FB8-8EA1-3D5882BBA632}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {88ACC674-407D-4D2A-90FA-EB66057DDECB}
+	EndGlobalSection
+EndGlobal

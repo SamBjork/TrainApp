@@ -1,0 +1,17 @@
+C:\Users\zigge\source\repos\TrainApp\TrainApp\obj\Debug\netcoreapp3.1\TrainApp.csprojAssemblyReference.cache
+C:\Users\zigge\source\repos\TrainApp\TrainApp\obj\Debug\netcoreapp3.1\TrainApp.AssemblyInfoInputs.cache
+C:\Users\zigge\source\repos\TrainApp\TrainApp\obj\Debug\netcoreapp3.1\TrainApp.AssemblyInfo.cs
+C:\Users\zigge\source\repos\TrainApp\TrainApp\bin\Debug\netcoreapp3.1\TrainApp.exe
+C:\Users\zigge\source\repos\TrainApp\TrainApp\bin\Debug\netcoreapp3.1\Data\controllerlog.txt
+C:\Users\zigge\source\repos\TrainApp\TrainApp\bin\Debug\netcoreapp3.1\Data\passengers.txt
+C:\Users\zigge\source\repos\TrainApp\TrainApp\bin\Debug\netcoreapp3.1\Data\stations.txt
+C:\Users\zigge\source\repos\TrainApp\TrainApp\bin\Debug\netcoreapp3.1\Data\timetable.txt
+C:\Users\zigge\source\repos\TrainApp\TrainApp\bin\Debug\netcoreapp3.1\Data\trains.txt
+C:\Users\zigge\source\repos\TrainApp\TrainApp\bin\Debug\netcoreapp3.1\Data\traintrack.txt
+C:\Users\zigge\source\repos\TrainApp\TrainApp\bin\Debug\netcoreapp3.1\TrainApp.deps.json
+C:\Users\zigge\source\repos\TrainApp\TrainApp\bin\Debug\netcoreapp3.1\TrainApp.runtimeconfig.json
+C:\Users\zigge\source\repos\TrainApp\TrainApp\bin\Debug\netcoreapp3.1\TrainApp.runtimeconfig.dev.json
+C:\Users\zigge\source\repos\TrainApp\TrainApp\bin\Debug\netcoreapp3.1\TrainApp.dll
+C:\Users\zigge\source\repos\TrainApp\TrainApp\bin\Debug\netcoreapp3.1\TrainApp.pdb
+C:\Users\zigge\source\repos\TrainApp\TrainApp\obj\Debug\netcoreapp3.1\TrainApp.dll
+C:\Users\zigge\source\repos\TrainApp\TrainApp\obj\Debug\netcoreapp3.1\TrainApp.pdb
