@@ -56,7 +56,7 @@ namespace TrainApp
 
             while (true)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
                 try
                 {
                     if(Operated == true)
