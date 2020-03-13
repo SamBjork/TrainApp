@@ -23,7 +23,7 @@ namespace TrainApp
         {
             _trainTracks = trainTracks;
             _stations = stations;
-            _passengers = passengers;
+            _stations[0].PassengersInStation.AddRange(passengers);
         }
 
         public TravelPlan SetTrain(List<Train> trains)
@@ -62,6 +62,9 @@ namespace TrainApp
                         {
                             case TrainState.atStartStation:
 
+                                train.PassengersInTrain.AddRange(_stations[0].PassengersInStation);
+                                _stations[0].PassengersInStation.Clear();
+
                                 train.Stop();
 
                                 var timeStartStation = trainTimeTableList.Where(x => x.StationId == track.StartStationID).FirstOrDefault();
@@ -73,7 +76,7 @@ namespace TrainApp
 
                                 if (globalClock >= timeStartStation.DepartureTime)
                                 {
-                                    Console.WriteLine("Train Departing");
+                                    Console.WriteLine("Train Departing with " + train.PassengersInTrain.Count + " passengers in train");
                                     train.Start();
                                     train.trainState = TrainState.onWayToClosingCrossing;
                                 }
@@ -112,7 +115,12 @@ namespace TrainApp
                                 {
                                     train.trainState = TrainState.atMiddleStation;
                                     train.Stop();
+
+                                    _stations[1].PassengersInStation.AddRange(train.PassengersInTrain);
+                                    train.PassengersInTrain.Clear();
+
                                     Console.WriteLine("The train has arrived at: " + _stations.Where(x => x.ID == track.MiddleStationID).Single().StationName);
+                                    Console.WriteLine("Dropped of " + _stations[1].PassengersInStation.Count + " passengers at station");
                                 }
                                 break;
 
@@ -124,7 +132,7 @@ namespace TrainApp
 
                                 else
                                 {
-                                    Console.WriteLine("Train Departing");
+                                    Console.WriteLine("Train Departing with" + train.PassengersInTrain.Count+ " passengers");
                                     train.Start();
                                     train.trainState = TrainState.onWayToSecondSwitch;
                                 }
