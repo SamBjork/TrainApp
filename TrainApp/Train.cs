@@ -10,13 +10,14 @@ namespace TrainApp
     {
         public int ID { get; private set; }
         public string Name { get; private set; } 
-        public int MaxSpeed { get; private set; }
+        public float MaxSpeed { get; private set; }
         public bool Operated { get; private set; }
         public List<Passenger> PassengersInTrain { get; set; }
         public int TrainTrackId { get; private set; }
         public TrainState trainState { get; set; }
-        private int _distanceTravelled;
-        public int DistanceTravelled {
+        private float _distanceTravelled;
+           public int timeTravelled = 0; 
+        public float DistanceTravelled {
             get 
             {
                 lock (this)
@@ -52,19 +53,19 @@ namespace TrainApp
 
         public void Drive()
         {
-            int timeTravelled = 0; 
 
             while (true)
             {
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
                 try
                 {
                     if(Operated == true)
                     {
 
-                        DistanceTravelled = MaxSpeed * timeTravelled;
+                        DistanceTravelled = (MaxSpeed/60) * timeTravelled;
                         Console.WriteLine("Train travelled: " + DistanceTravelled + "km");
                         timeTravelled ++;
+
                     }
                 }
                 catch (Exception)

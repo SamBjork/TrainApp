@@ -16,7 +16,7 @@ namespace TrainApp
         List<Station> _stations;
         List<Passenger> _passengers;
 
-        TimeSpan globalClock = new TimeSpan(10, 25, 00);
+        TimeSpan globalClock = new TimeSpan(10, 15, 00);
         TimeSpan zero = new TimeSpan(00, 00, 00);
 
         public TravelPlan(List<TrainTrack> trainTracks, List<Station> stations, List<Passenger> passengers)
@@ -50,7 +50,7 @@ namespace TrainApp
             {
                 while (true)
                 {
-                    Thread.Sleep(500);
+                    Thread.Sleep(1000);
                     globalClock = globalClock.Add(new TimeSpan(00, 01, 00));
                     foreach (var train in _trains)
                     {
