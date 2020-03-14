@@ -26,7 +26,6 @@ namespace TrainApp.Tests
 
             List<Schedule> schedules = Schedule.GetSchdules();
 
-
           //  TravelPlan travelPlan = new TravelPlan(trainTracks, stations).Start();
 
         }

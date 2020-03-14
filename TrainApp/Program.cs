@@ -18,14 +18,15 @@ namespace TrainApp
             List<Schedule> schedules = Schedule.GetSchdules();
             List<TrainTrack> trainTracks = TrainTrack.GetTrainTracks();
 
-            //instanciate trackobjects
+            //instanciate trackobjects standalone
+
             Console.WriteLine("Starting the Travel Plan");
             TravelPlan travelPlan = new TravelPlan(trainTracks, stations, passengers).SetTrain(trains).SetSchedule(schedules).Start();
+
             Console.WriteLine("Press any key to exit");
-
             Console.ReadKey();
-
-            Console.WriteLine("exit");
+            Console.Clear();
+            Console.WriteLine("You Exited");
         }
     }
 }
