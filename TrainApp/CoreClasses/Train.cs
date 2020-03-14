@@ -23,7 +23,6 @@ namespace TrainApp
                 lock (this)
                 {
                     return _distanceTravelled;
-
                 }
             }
             private set 
@@ -31,9 +30,15 @@ namespace TrainApp
                 lock (this)
                 {
                     _distanceTravelled = value;
-
                 }
             } 
+        }
+
+        public Train()
+        {
+            thread = new Thread(Drive);
+            thread.IsBackground = true;
+            thread.Start();
         }
         public Train(int id, string name, int maxSpeed, int trainTrackId)
         {
@@ -42,7 +47,6 @@ namespace TrainApp
             MaxSpeed = maxSpeed;
             TrainTrackId = trainTrackId;
             PassengersInTrain = new List<Passenger>();
-
 
             thread = new Thread(Drive);
             thread.IsBackground = true;
@@ -56,16 +60,14 @@ namespace TrainApp
 
             while (true)
             {
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
                 try
                 {
                     if(Operated == true)
                     {
-
                         DistanceTravelled = (MaxSpeed/60) * timeTravelled;
                         Console.WriteLine("Train travelled: " + DistanceTravelled + "km");
                         timeTravelled ++;
-
                     }
                 }
                 catch (Exception)
@@ -73,7 +75,6 @@ namespace TrainApp
 
                     break;
                 }
-
             }
         }
 
@@ -84,10 +85,22 @@ namespace TrainApp
 
         internal void Stop()
         {
-
-            Operated = false;            
-            
+            Operated = false;   
         }
-
+        public static List<Train> GetTrains()
+        {
+            string line;
+            List<Train> listOfTrains = new List<Train>();
+            StreamReader file = new StreamReader(@"./Data/trains.txt");
+            file.ReadLine();
+            while ((line = file.ReadLine()) != null)
+            {
+                string[] lines = line.Split(',');
+                listOfTrains.Add(new Train(int.Parse(lines[0]), lines[1], int.Parse(lines[2]), int.Parse(lines[3])));
+            }
+            
+            file.Close();
+            return listOfTrains;
+        }
     }
 }

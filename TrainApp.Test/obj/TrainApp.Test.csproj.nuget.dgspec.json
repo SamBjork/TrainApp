@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zigge\\source\\repos\\TrainApp\\TrainApp.Test\\TrainApp.Test.csproj": {}
+    "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp.Test\\TrainApp.Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zigge\\source\\repos\\TrainApp\\TrainApp.Test\\TrainApp.Test.csproj": {
+    "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp.Test\\TrainApp.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zigge\\source\\repos\\TrainApp\\TrainApp.Test\\TrainApp.Test.csproj",
+        "projectUniqueName": "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp.Test\\TrainApp.Test.csproj",
         "projectName": "TrainApp.Test",
-        "projectPath": "C:\\Users\\zigge\\source\\repos\\TrainApp\\TrainApp.Test\\TrainApp.Test.csproj",
-        "packagesPath": "C:\\Users\\zigge\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zigge\\source\\repos\\TrainApp\\TrainApp.Test\\obj\\",
+        "projectPath": "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp.Test\\TrainApp.Test.csproj",
+        "packagesPath": "C:\\Users\\Sam\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp.Test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\zigge\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Sam\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -32,8 +32,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\zigge\\source\\repos\\TrainApp\\TrainApp\\TrainApp.csproj": {
-                "projectPath": "C:\\Users\\zigge\\source\\repos\\TrainApp\\TrainApp\\TrainApp.csproj"
+              "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp\\TrainApp.csproj": {
+                "projectPath": "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp\\TrainApp.csproj"
               }
             }
           }
@@ -79,25 +79,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\zigge\\source\\repos\\TrainApp\\TrainApp\\TrainApp.csproj": {
+    "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp\\TrainApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zigge\\source\\repos\\TrainApp\\TrainApp\\TrainApp.csproj",
+        "projectUniqueName": "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp\\TrainApp.csproj",
         "projectName": "TrainApp",
-        "projectPath": "C:\\Users\\zigge\\source\\repos\\TrainApp\\TrainApp\\TrainApp.csproj",
-        "packagesPath": "C:\\Users\\zigge\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zigge\\source\\repos\\TrainApp\\TrainApp\\obj\\",
+        "projectPath": "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp\\TrainApp.csproj",
+        "packagesPath": "C:\\Users\\Sam\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\zigge\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Sam\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -136,7 +136,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -61,23 +61,35 @@ namespace TrainApp
             {
                 while (true)
                 {
-                    Thread.Sleep(500);
+                    Thread.Sleep(1000);
                     globalClock = globalClock.Add(new TimeSpan(00, 01, 00));
+                    List<Schedule> trainTimeTableList = new List<Schedule>();
                     foreach (var train in _trains)
                     {
-                        var track = _trainTracks.Where(x => x.Id == train.TrainTrackId).FirstOrDefault();
-                        var trainTimeTableList = _schedules.Where(x => x.TrainId == train.ID).ToList();
 
-                        if(track.Id == 1)
-                            StateMachineTrack1(train, trainTimeTableList, track);
-                        else
-                            StateMachineTrack2(train, trainTimeTableList, track);
 
+                        trainTimeTableList = (_schedules.Where(x => x.TrainId == train.ID).ToList()); ;
+                        var track = _trainTracks.Where(x => x.Id == train.TrainTrackId).Single();
+                        try
+                        {
+                        if (train.ID == 2)
+                                StateMachineTrack1(train, trainTimeTableList, track);
+                            else if (train.ID == 3)
+                                StateMachineTrack2(train, trainTimeTableList, track);
+
+                        }
+                        catch
+                        {
+                            
+                        }
+        
                     }
                 }
             }
             return this;
         }
+
+
 
         private void StateMachineTrack1(Train train, List<Schedule> trainTimeTableList, TrainTrack track)
         {
@@ -90,14 +102,14 @@ namespace TrainApp
 
                     train.Stop();
 
-                    var timeStartStation = trainTimeTableList.Where(x => x.StationId == track.StartStationID).FirstOrDefault();
+                    var timeStartStation = trainTimeTableList.Where(x => x.StationId == track.StartStationId).FirstOrDefault();
 
-                    Console.WriteLine("The train " + train.Name + " is at: " + _stations.Where(x => x.ID == track.StartStationID).Single().StationName + " station");
+                    Console.WriteLine("The train " + train.Name + " is at: " + _stations.Where(x => x.ID == track.StartStationId).Single().StationName + " station");
 
-                    if ((timeStartStation.DepartureTime - globalClock) >= zero)
-                        Console.WriteLine("Train waiting to depart. Departing in : " + (timeStartStation.DepartureTime - globalClock));
+                    if ((TimeSpan.Parse(timeStartStation.DepartureTime) - globalClock) >= zero)
+                        Console.WriteLine("Train waiting to depart. Departing in : " + (TimeSpan.Parse(timeStartStation.DepartureTime) - globalClock));
 
-                    if (globalClock >= timeStartStation.DepartureTime)
+                    if (globalClock >= TimeSpan.Parse(timeStartStation.DepartureTime))
                     {
                         Console.WriteLine("Train Departing with " + train.PassengersInTrain.Count + " passengers in train");
                         train.Start();
@@ -107,7 +119,7 @@ namespace TrainApp
 
                 case TrainState.onWayToClosingCrossing:
 
-                    if (train.DistanceTravelled >= track.CrossingDistance - 1)
+                    if (train.DistanceTravelled >= track.CrossingPosition - 1)
                     {
                         Console.WriteLine("Closing Crossing");
                         train.trainState = TrainState.onWayToOpenCrossing;
@@ -115,7 +127,7 @@ namespace TrainApp
                     break;
 
                 case TrainState.onWayToOpenCrossing:
-                    if (train.DistanceTravelled >= track.CrossingDistance + 1)
+                    if (train.DistanceTravelled >= track.CrossingPosition + 1)
                     {
                         Console.WriteLine("Opening Crossing");
                         train.trainState = TrainState.onWayToFirstSwitch;
@@ -124,9 +136,9 @@ namespace TrainApp
 
                 case TrainState.onWayToFirstSwitch:
 
-                    if (train.DistanceTravelled >= track.Switch1Distance)
+                    if (train.DistanceTravelled >= track.Switch1Position)
                     {
-                        track.Switch1Direction = false;
+                        track.Switch1Left = true;
                         Console.WriteLine("First Switch is switched to it's left position");
                         train.trainState = TrainState.onWayToMiddleStation;
                     }
@@ -134,7 +146,7 @@ namespace TrainApp
 
                 case TrainState.onWayToMiddleStation:
 
-                    if (train.DistanceTravelled >= track.MiddleStationDistance)
+                    if (train.DistanceTravelled >= track.MiddleStationPosition)
                     {
                         train.trainState = TrainState.atMiddleStation;
                         train.Stop();
@@ -147,16 +159,16 @@ namespace TrainApp
                             train.PassengersInTrain.RemoveAt(0);
                         }
 
-                        Console.WriteLine("The train has arrived at: " + _stations.Where(x => x.ID == track.MiddleStationID).Single().StationName);
+                        Console.WriteLine("The train has arrived at: " + _stations.Where(x => x.ID == track.MiddleStationId).Single().StationName);
                         Console.WriteLine("Dropped of " + _stations[1].PassengersInStation.Count + " passengers at station");
                     }
                     break;
 
                 case TrainState.atMiddleStation:
-                    var timeMiddleStation = trainTimeTableList.Where(x => x.StationId == track.MiddleStationID).Single();
+                    var timeMiddleStation = trainTimeTableList.Where(x => x.StationId == track.MiddleStationId).Single();
 
-                    if ((timeMiddleStation.DepartureTime - globalClock) >= zero)
-                        Console.WriteLine("Train waiting to depart. Departing in : " + (timeMiddleStation.DepartureTime - globalClock));
+                    if ((TimeSpan.Parse(timeMiddleStation.DepartureTime) - globalClock) >= zero)
+                        Console.WriteLine("Train waiting to depart. Departing in : " + (TimeSpan.Parse(timeMiddleStation.DepartureTime) - globalClock));
 
                     else
                     {
@@ -167,20 +179,20 @@ namespace TrainApp
                     break;
 
                 case TrainState.onWayToSecondSwitch:
-                    if (train.DistanceTravelled >= track.Switch2Distance)
+                    if (train.DistanceTravelled >= track.Switch2Position)
                     {
-                        track.Switch2Direction = true;
+                        track.Switch2Left = false;
                         Console.WriteLine("Second Switch is switched to it's right position");
                         train.trainState = TrainState.onWayToEndStation;
                     }
                     break;
 
                 case TrainState.onWayToEndStation:
-                    if (train.DistanceTravelled >= track.EndStationDistance)
+                    if (train.DistanceTravelled >= track.EndStationPosition)
                     {
                         train.trainState = TrainState.atEndStation;
                         train.Stop();
-                        Console.WriteLine("The train has arrived at: " + _stations.Where(x => x.ID == track.EndStationID).Single().StationName);
+                        Console.WriteLine("The train has arrived at: " + _stations.Where(x => x.ID == track.EndStationId).Single().StationName);
                     }
 
                     break;
@@ -202,14 +214,14 @@ namespace TrainApp
 
                     train.Stop();
 
-                    var timeStartStation = trainTimeTableList.Where(x => x.StationId == track.StartStationID).FirstOrDefault();
+                    var timeStartStation = trainTimeTableList.Where(x => x.StationId == track.StartStationId).FirstOrDefault();
 
-                    Console.WriteLine("The train " + train.Name + " is at: " + _stations.Where(x => x.ID == track.StartStationID).Single().StationName + " station");
+                    Console.WriteLine("The train " + train.Name + " is at: " + _stations.Where(x => x.ID == track.StartStationId).Single().StationName + " station");
 
-                    if ((timeStartStation.DepartureTime - globalClock) >= zero)
-                        Console.WriteLine("Train waiting to depart. Departing in : " + (timeStartStation.DepartureTime - globalClock));
+                    if ((TimeSpan.Parse(timeStartStation.DepartureTime) - globalClock) >= zero)
+                        Console.WriteLine("Train waiting to depart. Departing in : " + (TimeSpan.Parse(timeStartStation.DepartureTime) - globalClock));
 
-                    if (globalClock >= timeStartStation.DepartureTime)
+                    if (globalClock >= TimeSpan.Parse(timeStartStation.DepartureTime))
                     {
                         Console.WriteLine("Train Departing with " + train.PassengersInTrain.Count + " passengers in train");
                         train.Start();
@@ -219,9 +231,9 @@ namespace TrainApp
 
                 case TrainState.onWayToSecondSwitch:
 
-                    if (train.DistanceTravelled >= track.Switch2Distance)
+                    if (train.DistanceTravelled >= track.Switch2Position)
                     {
-                        track.Switch2Direction = false;
+                        track.Switch2Left = true;
                         Console.WriteLine("Second Switch is switched to it's left position");
                         train.trainState = TrainState.onWayToMiddleStation;
                     }
@@ -229,7 +241,7 @@ namespace TrainApp
 
                 case TrainState.onWayToMiddleStation:
 
-                    if (train.DistanceTravelled >= track.MiddleStationDistance)
+                    if (train.DistanceTravelled >= track.MiddleStationPosition)
                     {
                         train.trainState = TrainState.atMiddleStation;
                         train.Stop();
@@ -242,17 +254,17 @@ namespace TrainApp
                             train.PassengersInTrain.RemoveAt(0);
                         }
 
-                        Console.WriteLine("The train has arrived at: " + _stations.Where(x => x.ID == track.MiddleStationID).Single().StationName);
+                        Console.WriteLine("The train has arrived at: " + _stations.Where(x => x.ID == track.MiddleStationId).Single().StationName);
                         Console.WriteLine("Dropped of " + _stations[1].PassengersInStation.Count + " passengers at station");
                     }
                     break;
 
                 case TrainState.atMiddleStation:
 
-                    var timeMiddleStation = trainTimeTableList.Where(x => x.StationId == track.MiddleStationID).Single();
+                    var timeMiddleStation = trainTimeTableList.Where(x => x.StationId == track.MiddleStationId).Single();
 
-                    if ((timeMiddleStation.DepartureTime - globalClock) >= zero)
-                        Console.WriteLine("Train waiting to depart. Departing in : " + (timeMiddleStation.DepartureTime - globalClock));
+                    if ((TimeSpan.Parse(timeMiddleStation.DepartureTime) - globalClock) >= zero)
+                        Console.WriteLine("Train waiting to depart. Departing in : " + (TimeSpan.Parse(timeMiddleStation.DepartureTime) - globalClock));
 
                     else
                     {
@@ -264,9 +276,9 @@ namespace TrainApp
 
                 case TrainState.onWayToFirstSwitch:
 
-                    if (train.DistanceTravelled >= track.Switch1Distance)
+                    if (train.DistanceTravelled >= track.Switch1Position)
                     {
-                        track.Switch1Direction = true;
+                        track.Switch1Left = false;
                         Console.WriteLine("First Switch is switched to it's right position");
                         train.trainState = TrainState.onWayToClosingCrossing;
                     }
@@ -274,7 +286,7 @@ namespace TrainApp
 
                 case TrainState.onWayToClosingCrossing:
 
-                    if (train.DistanceTravelled >= track.CrossingDistance - 1)
+                    if (train.DistanceTravelled >= track.CrossingPosition - 1)
                     {
                         Console.WriteLine("Closing Crossing");
                         train.trainState = TrainState.onWayToOpenCrossing;
@@ -282,7 +294,7 @@ namespace TrainApp
                     break;
 
                 case TrainState.onWayToOpenCrossing:
-                    if (train.DistanceTravelled >= track.CrossingDistance + 1)
+                    if (train.DistanceTravelled >= track.CrossingPosition + 1)
                     {
                         Console.WriteLine("Opening Crossing");
                         train.trainState = TrainState.onWayToEndStation;
@@ -291,11 +303,11 @@ namespace TrainApp
 
 
                 case TrainState.onWayToEndStation:
-                    if (train.DistanceTravelled >= track.EndStationDistance)
+                    if (train.DistanceTravelled >= track.EndStationPosition)
                     {
                         train.trainState = TrainState.atEndStation;
                         train.Stop();
-                        Console.WriteLine("The train has arrived at: " + _stations.Where(x => x.ID == track.EndStationID).Single().StationName);
+                        Console.WriteLine("The train has arrived at: " + _stations.Where(x => x.ID == track.EndStationId).Single().StationName);
                     }
 
                     break;
