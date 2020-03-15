@@ -16,14 +16,17 @@ namespace TrainApp
         List<Station> _stations;
         List<Passenger> _passengers;
 
+
+        //skapar den globala klockan som alltid tickar i depart metodens while
         TimeSpan globalClock = new TimeSpan(10, 15, 00);
         TimeSpan zero = new TimeSpan(00, 00, 00);
 
+        //nedan läser in travleplan med 3 av 5 listor vi behöver som parametrar i en konstruktorerna
         public TravelPlan(List<TrainTrack> trainTracks, List<Station> stations, List<Passenger> passengers)
         {
             _trainTracks = trainTracks;
             _stations = stations;
-
+            // påbörjat logik för att lägga till adekvat antal passagerare i vardera station
             var passengerHalfCount = (passengers.Count / 2);
 
             for (int i = 0; i < passengerHalfCount; i++)
@@ -37,6 +40,7 @@ namespace TrainApp
             }
         }
 
+        //har nedan serparerat ut dessa två list-set-metoder för att kunna visa på ett "fulent api" i metodsanropet 
         public TravelPlan SetTrain(List<Train> trains)
         {
             _trains = trains;
@@ -49,9 +53,10 @@ namespace TrainApp
             return this;
         }
 
+        //travelplans startmetod
         public TravelPlan Start()
         {
-
+            //skapar instans av plannerthread som kommer köras i bakgrunden tills alla trådar dör
             Thread planerthread = new Thread(Depart);
             planerthread.IsBackground = true;
             planerthread.Start();
@@ -61,28 +66,29 @@ namespace TrainApp
             {
                 while (true)
                 {
+                    //låter tråden sova i 1 sekund för att simulera att 1 min går på en sekund ( eftersom globalklock räknar upp 1 min)
                     Thread.Sleep(1000);
                     globalClock = globalClock.Add(new TimeSpan(00, 01, 00));
                     List<Schedule> trainTimeTableList = new List<Schedule>();
                     foreach (var train in _trains)
                     {
-
-
+                        //kollar i schedules vart trainId == i (nuvarande train) train's ID och lägger till i timetablelist
                         trainTimeTableList = (_schedules.Where(x => x.TrainId == train.ID).ToList()); ;
+                        //jämför id på trainTracks där train's trainTrack id stämmer överens och tilldelar till track
                         var track = _trainTracks.Where(x => x.Id == train.TrainTrackId).Single();
+
+                        //väljer rätt statemachine
                         try
                         {
                         if (train.ID == 2)
                                 StateMachineTrack1(train, trainTimeTableList, track);
                             else if (train.ID == 3)
                                 StateMachineTrack2(train, trainTimeTableList, track);
-
                         }
                         catch
                         {
                             
                         }
-        
                     }
                 }
             }
@@ -96,10 +102,11 @@ namespace TrainApp
             switch (train.trainState)
             {
                 case TrainState.atStartStation:
-
+                    //vi börjar med att lägga till passagerare 
                     train.PassengersInTrain.AddRange(_stations[0].PassengersInStation);
                     _stations[0].PassengersInStation.Clear();
 
+                    // ser till att tåget är stannat (kanske lite överflödig dock)
                     train.Stop();
 
                     var timeStartStation = trainTimeTableList.Where(x => x.StationId == track.StartStationId).FirstOrDefault();

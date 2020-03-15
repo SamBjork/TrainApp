@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp\\TrainApp.csproj": {}
+    "C:\\Users\\Sam\\Source\\Repos\\TrainApp\\TrainApp\\TrainApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp\\TrainApp.csproj": {
+    "C:\\Users\\Sam\\Source\\Repos\\TrainApp\\TrainApp\\TrainApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp\\TrainApp.csproj",
+        "projectUniqueName": "C:\\Users\\Sam\\Source\\Repos\\TrainApp\\TrainApp\\TrainApp.csproj",
         "projectName": "TrainApp",
-        "projectPath": "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp\\TrainApp.csproj",
+        "projectPath": "C:\\Users\\Sam\\Source\\Repos\\TrainApp\\TrainApp\\TrainApp.csproj",
         "packagesPath": "C:\\Users\\Sam\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp\\obj\\",
+        "outputPath": "C:\\Users\\Sam\\Source\\Repos\\TrainApp\\TrainApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
