@@ -17,6 +17,7 @@ namespace TrainApp
         public TrainState trainState { get; set; }
         private float _distanceTravelled;
            public int timeTravelled = 0; 
+        //låser distance travlled för att den inte ska kunna ändras från två håll samtidigt
         public float DistanceTravelled {
             get 
             {
@@ -33,7 +34,7 @@ namespace TrainApp
                 }
             } 
         }
-
+        // i de olika konstruktorerna skapas och starar en ny tråd som tar som argument Drive metoden, alltså skapar en tråd som kör den metoden.
         public Train()
         {
             thread = new Thread(Drive);
@@ -55,6 +56,8 @@ namespace TrainApp
         }
         private Thread thread;
 
+        //simulerar att tåget åker med extremt lätt mattematik, (för att alltså simulera att en sekund är en minut.
+        //som man kan se körs bara if-satsen som faktiskt innehållelr "Kör"-logiken när operated är sant
         public void Drive()
         {
 
@@ -77,7 +80,7 @@ namespace TrainApp
                 }
             }
         }
-
+        //och det är här i start alternativt stop-metoderna vi bestämmer om tåget åker eller ej.
         internal void Start()
         { 
             Operated = true;
