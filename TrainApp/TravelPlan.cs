@@ -53,6 +53,7 @@ namespace TrainApp
             return this;
         }
 
+
         //travelplans startmetod
         public TravelPlan Start()
         {
@@ -112,6 +113,7 @@ namespace TrainApp
                     var timeStartStation = trainTimeTableList.Where(x => x.StationId == track.StartStationId).FirstOrDefault();
 
                     Console.WriteLine("The train " + train.Name + " is at: " + _stations.Where(x => x.ID == track.StartStationId).Single().StationName + " station");
+                    ControllerLog.LogInfo("hej");
 
                     if ((TimeSpan.Parse(timeStartStation.DepartureTime) - globalClock) >= zero)
                         Console.WriteLine("Train waiting to depart. Departing in : " + (TimeSpan.Parse(timeStartStation.DepartureTime) - globalClock));

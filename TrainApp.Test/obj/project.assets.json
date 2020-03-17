@@ -6537,11 +6537,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sam\\Source\\Repos\\TrainApp\\TrainApp.Test\\TrainApp.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp.Test\\TrainApp.Tests.csproj",
       "projectName": "TrainApp.Tests",
-      "projectPath": "C:\\Users\\Sam\\Source\\Repos\\TrainApp\\TrainApp.Test\\TrainApp.Tests.csproj",
+      "projectPath": "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp.Test\\TrainApp.Tests.csproj",
       "packagesPath": "C:\\Users\\Sam\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sam\\Source\\Repos\\TrainApp\\TrainApp.Test\\obj\\",
+      "outputPath": "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp.Test\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -6562,8 +6562,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Sam\\Source\\Repos\\TrainApp\\TrainApp\\TrainApp.csproj": {
-              "projectPath": "C:\\Users\\Sam\\Source\\Repos\\TrainApp\\TrainApp\\TrainApp.csproj"
+            "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp\\TrainApp.csproj": {
+              "projectPath": "C:\\Users\\Sam\\source\\repos\\TrainApp\\TrainApp\\TrainApp.csproj"
             }
           }
         }
